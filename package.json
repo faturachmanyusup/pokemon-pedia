@@ -1,0 +1,26 @@
+{
+  "name": "pokemon-pedia",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.5.8",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "facepaint": "^1.2.1",
+    "graphql": "^16.3.0",
+    "next": "12.0.10",
+    "next-pwa": "^5.4.4",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
+    "eslint": "8.9.0",
+    "eslint-config-next": "12.0.10"
+  }
+}
