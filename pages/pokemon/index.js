@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useLazyQuery } from '@apollo/client';
@@ -85,7 +84,7 @@ export default function PokemonList() {
   if (loading && !pokemons.length) return <PageLoader />
 
   return (
-    <Container>
+    <Container dataTestId="pokemon">
       <SEO
         title="Pokemon Pedia | Pokemon"
         description="Pokemon List"

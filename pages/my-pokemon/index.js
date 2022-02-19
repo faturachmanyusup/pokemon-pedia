@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext } from 'react';
 import Link from 'next/link';
 import { Container } from 'components/container';

@@ -10,6 +10,7 @@ export default function Header() {
 
   return (
     <header
+      data-testid="header"
       css={css({
         boxShadow: '0 2px 1px 1px rgba(0, 0, 0, 0.1)',
         height: '4rem',

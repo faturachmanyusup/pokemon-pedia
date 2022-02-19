@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import { client } from 'gpql/index';
 import { GET_POKEMON, GET_POKEMON_DETAIL } from 'gpql/query';
