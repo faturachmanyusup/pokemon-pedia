@@ -17,6 +17,10 @@ module.exports = withPWA({
     runtimeCaching,
     buildExcludes: [/middleware-manifest.json$/]
   },
+  compiler: {
+    styledComponents: true,
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   async redirects() {
     return [
       {

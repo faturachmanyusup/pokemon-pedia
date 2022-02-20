@@ -7,7 +7,7 @@ export const Preview = (props) => {
   const [preview, setPreview] = useState(props.images[0]);
 
   return (
-    <div>
+    <div data-testid="preview-image">
       <Card classname='cursor-default' css={{ textAlign: 'center' }}>
         <Image
           src={preview}
@@ -27,6 +27,7 @@ export const Preview = (props) => {
           gap: '0.5rem',
           marginTop: '1rem'
         })}
+        data-testid="preview-options"
       >
         {props.images.map((img, idx) => (
           <Card

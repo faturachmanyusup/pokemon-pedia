@@ -17,13 +17,16 @@ const bounce = keyframes`
 
 export function PageLoader() {
   return (
-    <Container>
-      <div css={css({
-        margin: 'auto auto',
-        height: '100vh',
-        textAlign: 'center',
-        animation: 'ease-in-out 1000ms infinite'
-      })}>
+    <Container dataTestId="page-loader">
+      <div
+        css={css({
+          margin: 'auto auto',
+          height: '100vh',
+          textAlign: 'center',
+          animation: 'ease-in-out 1000ms infinite'
+        })}
+        id="page-loader"
+      >
         <Image
           css={css({ animation: `${bounce} 1s ease infinite` })}
           src="/assets/images/pokeball.png"
@@ -32,7 +35,6 @@ export function PageLoader() {
           height={240}
           quality={100}
           priority={true}
-          data-testid="loading-page"
         />
         <h2>Wait a second ...</h2>
       </div>

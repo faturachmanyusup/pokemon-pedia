@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { GET_POKEMON_DETAIL } from 'gpql/query';
 import { css } from '@emotion/react';
 import { useContext, useEffect, useState } from 'react';

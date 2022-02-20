@@ -1,5 +1,3 @@
-/** @jsxImportSource @emotion/react */
-
 import { breakpoints } from "styles/variable";
 import facepaint from "facepaint";
 

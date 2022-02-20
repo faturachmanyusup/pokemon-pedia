@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import { client } from 'gpql/index';
 import { GET_POKEMON, GET_POKEMON_DETAIL } from 'gpql/query';
@@ -107,12 +106,13 @@ export default function PokemonDetail(props) {
 
         {catchStatus !== 'success' && (
           <Button
+            data-testid="catch-button"
             type='button'
             className='cursor-pointer flex-row justify-content-center'
             onClick={catchPokemon}
           >
             {loading
-              ? <Spinner />
+              ? <Spinner data-testid="spinner" />
               : (
                 <>
                   {catchStatus === '' && (

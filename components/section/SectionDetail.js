@@ -6,7 +6,7 @@ import { css } from "@emotion/react";
 
 export const PokemonName = (props) => {
   return (
-    <Section>
+    <Section data-testid="pokemon-section">
       <div className='flex-row justify-content-between' css={mq({ marginTop: ['1rem', '1rem', '0'] })}>
         <h1 className="capitalize">{props.name}</h1>
         <h1 className='text-normal'>{props.overallStat}</h1>
@@ -34,7 +34,7 @@ export const PokemonName = (props) => {
 
 export const BaseStatus = (props) => {
   return (
-    <Section>
+    <Section data-testid="base-status-section">
       <SectionTitle>Base Status</SectionTitle>
       <div
         css={mq({

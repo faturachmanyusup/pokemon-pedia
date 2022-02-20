@@ -14,7 +14,7 @@ export const Card = styled.div(props => ({
 
 export const PokemonCard = forwardRef((props, ref) => {
   return (
-    <a lang="en" href={props.href} ref={ref}>
+    <a lang="en" href={props.href} ref={ref} data-testid="pokemon-card">
       <Card
         css={mq({
           padding: '1rem',
@@ -58,7 +58,7 @@ export const PokemonCard = forwardRef((props, ref) => {
             marginTop: ['5rem', '5rem', '4rem']
           })}
         >
-          <h3 css={mq({ textTransform: 'capitalize', fontSize: [24, 24, 16] })}>
+          <h3 css={mq({ textTransform: 'capitalize', fontSize: [24, 24, 16] })} data-testid="card-id">
             {props.labelLeft}
           </h3>
           <span>{props.labelRight}</span>

@@ -3,10 +3,9 @@
   "rules": {
     "indent": ["error", 2],
     "eqeqeq": "error",
-    "camelcase": "error",
     "no-unused-vars": "error",
     "no-console": "warn",
-    "no-useless-constructor": "error",
-    "react/display-name": "off"
+    "react/display-name": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }

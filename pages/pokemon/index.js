@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useLazyQuery } from '@apollo/client';
@@ -28,6 +27,7 @@ export default function PokemonList() {
   const context = useContext(Context);
   const router = useRouter();
   const observerRef = useRef();
+  const limit = 30;
 
   const [pokemons, setPokemons] = useState([]);
   const [isBottom, setIsBottom] = useState(false);
@@ -58,9 +58,9 @@ export default function PokemonList() {
 
   const getPokemons = () => {
     queryGetPokemons({
-      variables: { limit: 30, offset: pokemons.length },
+      variables: { limit, offset: pokemons.length },
       onCompleted: res => {
-        if (res.pokemons.results.length < 30) {
+        if (res.pokemons.results.length < limit) {
           setIsBottom(true);
         }
 
@@ -85,7 +85,7 @@ export default function PokemonList() {
   if (loading && !pokemons.length) return <PageLoader />
 
   return (
-    <Container>
+    <Container dataTestId="pokemon">
       <SEO
         title="Pokemon Pedia | Pokemon"
         description="Pokemon List"
