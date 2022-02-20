@@ -106,12 +106,13 @@ export default function PokemonDetail(props) {
 
         {catchStatus !== 'success' && (
           <Button
+            data-testid="catch-button"
             type='button'
             className='cursor-pointer flex-row justify-content-center'
             onClick={catchPokemon}
           >
             {loading
-              ? <Spinner />
+              ? <Spinner data-testid="spinner" />
               : (
                 <>
                   {catchStatus === '' && (

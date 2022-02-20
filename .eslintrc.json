@@ -3,7 +3,6 @@
   "rules": {
     "indent": ["error", 2],
     "eqeqeq": "error",
-    "camelcase": "error",
     "no-unused-vars": "error",
     "no-console": "warn",
     "react/display-name": "off",
