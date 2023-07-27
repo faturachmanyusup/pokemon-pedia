@@ -9,6 +9,7 @@ export const SEO = (props) => {
       <link rel="canonical" href={`${SITE_URL}/pokemon`}  />
       <meta name="description" content={props.description || ''} />
       <meta name="google-site-verification" content="ukQV3uEuJQsAMgot1NKex8GlljENmVz__jczChQUmUw" />
+      <link rel='manifest' href='/manifest.json' />
     </Head>
   )
 }
