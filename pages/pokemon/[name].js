@@ -1,6 +1,5 @@
-import dynamic from 'next/dynamic';
 import { client } from 'gpql/index';
-import { GET_POKEMON, GET_POKEMON_DETAIL } from 'gpql/query';
+import { GET_POKEMON_DETAIL, GET_POKEMON } from 'gpql/query';
 import { css } from '@emotion/react';
 import { useContext, useEffect, useState } from 'react';
 import { Context } from 'store';
@@ -18,13 +17,10 @@ import {
 import { Preview } from 'components/image';
 import { Main, Side } from 'components/layout';
 import { SEO } from 'components/seo';
+import { Spinner } from 'components/loader';
 
 import { catching } from 'helpers/random';
 import { capitalize } from 'helpers/letter';
-
-const Spinner = dynamic(() =>
-  import('components/loader').then(mod => mod.Spinner)
-);
 
 export default function PokemonDetail(props) {
   const context = useContext(Context);
@@ -100,68 +96,69 @@ export default function PokemonDetail(props) {
       <SEO
         title={`Pokemon Pedia - ${capitalize(props.pokemon.name)}`}
         description={`${props.pokemon.name} Detail`}
+        path={`/pokemon/${props.pokemon.name}`}
       />
       <Side>
         <Preview images={Object.values(props.pokemon.sprites)} />
 
-        {catchStatus !== 'success' && (
-          <Button
-            data-testid="catch-button"
-            type='button'
-            className='cursor-pointer flex-row justify-content-center'
-            onClick={catchPokemon}
-          >
-            {loading
-              ? <Spinner data-testid="spinner" />
-              : (
-                <>
-                  {catchStatus === '' && (
-                    hasCaught ? 'Catch Again!' : 'Catch Me!'
-                  )}
-      
-                  {catchStatus === 'failed' && 'Try Again!'}
-                </>
-              )
-            }
-          </Button>
-        )}
-
-        {catchStatus === 'success' && (
-          <>
-            <form
-              className='flex-row justify-content-between align-items-center'
-              onSubmit={savePokemon}
+        {catchStatus !== 'success'
+          ? (
+            <Button
+              data-testid="catch-button"
+              type='button'
+              className='flex-row justify-content-center'
+              onClick={catchPokemon}
             >
-              <Input
-                placeholder="Input name here.."
-                value={localName}
-                onChange={(e) => setLocalName(e.target.value)}
-              />
-              <Button
-                type='submit'
-                css={{
-                  padding: '0 1rem',
-                  color: '#ffffff',
-                  backgroundColor: 'green',
-                  marginLeft: '1.5rem',
-                  cursor: 'pointer'
-                }}
+              {loading
+                ? <Spinner data-testid="spinner" />
+                : (
+                  <>
+                    {catchStatus === '' && (
+                      hasCaught ? 'Catch Again!' : 'Catch Me!'
+                    )}
+        
+                    {catchStatus === 'failed' && 'Try Again!'}
+                  </>
+                )
+              }
+            </Button>
+          )
+          : (
+            <>
+              <form
+                className='flex-row justify-content-between align-items-center'
+                onSubmit={savePokemon}
               >
-                Save
-              </Button>
-            </form>
-            {error?.message === 'DUPLICATE NAME'
-              ? <p css={css({ color: 'red' })}>Name unavailable. Try another name.</p>
-              : (
-                <p>
-                  Congrats! <strong className='capitalize'>{props.pokemon.name}</strong> was caught.
-                  <br />
-                  Let&apos;s give him/her a name.
-                </p>
-              )
-            }
-          </>
-        )}
+                <Input
+                  placeholder="Input name here.."
+                  value={localName}
+                  onChange={(e) => setLocalName(e.target.value)}
+                />
+                <Button
+                  type='submit'
+                  css={{
+                    padding: '0 1rem',
+                    color: '#ffffff',
+                    backgroundColor: 'green',
+                    marginLeft: '1.5rem',
+                  }}
+                >
+                  Save
+                </Button>
+              </form>
+              {error?.message === 'DUPLICATE NAME'
+                ? <p css={css({ color: 'red' })}>Name unavailable. Try another name.</p>
+                : (
+                  <p>
+                    Congrats! <strong className='capitalize'>{props.pokemon.name}</strong> was caught.
+                    <br />
+                    Let&apos;s give him/her a name.
+                  </p>
+                )
+              }
+            </>
+          )
+        }
 
         {catchStatus === 'failed' && (
           <p className='text-center'>
@@ -195,9 +192,7 @@ export async function getServerSideProps({ params }) {
     };
   } catch (err) {
     return {
-      props: {
-        error: err
-      }
-    };
+      notFound: true
+    }
   }
 }

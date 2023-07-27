@@ -25,7 +25,7 @@ const Modal = dynamic(() =>
 );
 
 export default function PokemonDetail(props) {
-  const context = useContext(Context);
+  const { getPokemon, removePokemon } = useContext(Context);
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
@@ -33,12 +33,12 @@ export default function PokemonDetail(props) {
   const [queryGetPokemon] = useLazyQuery(GET_POKEMON_DETAIL);
   const [showModal, setShowModal] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
-  const [disableRelease, setDisableRelease] = useState(false);
+  const [wasReleased, setWasReleased] = useState(false);
 
   const [overallStat, setOverallStat] = useState(0);
 
   useEffect(() => {
-    context.getPokemon(props.name)
+    getPokemon(props.name)
       .then(localPokemon => {
         queryGetPokemon({
           variables: { name: localPokemon.name },
@@ -69,45 +69,50 @@ export default function PokemonDetail(props) {
   }, [])
 
   const onClickRelease = () => {
-    context.removePokemon(props.name);
+    removePokemon(props.name);
     setShowModal(false);
     setShowNotif(true);
-    setDisableRelease(true);
+    setWasReleased(true);
   }
-
-  if (loading) return <PageLoader />
 
   return (
     <Container display='flex' direction={['column', 'column', 'row']} gap='0 5rem'>
       <SEO
         title={`Pokemon Pedia - ${capitalize(props.name)}`}
         description={`${props.name} Detail`}
+        path={`/my-pokemon/${props.name}`}
       />
-      <Side>
-        <Preview images={Object.values(pokemon.sprites)} />
-        <Button
-          type='button'
-          css={css({
-            color: '#ffffff',
-            backgroundColor: '#D02806',
-            cursor: 'pointer'
-          })}
-          onClick={() => setShowModal(true)}
-          disabled={disableRelease}
-        >
-          Release
-        </Button>
-      </Side>
-      <Main css={{ gap: '1rem 0' }}>
-        <PokemonName
-          name={`${props.name} (${pokemon.name})`}
-          overallStat={overallStat}
-          types={pokemon.types}
-        />
-        <BaseStatus stats={pokemon.stats} />
-        <OtherSection title="Abilities" others={pokemon.abilities} />
-        <OtherSection title="Moves" others={pokemon.moves} />
-      </Main>
+      {loading
+        ? <PageLoader />
+        : (
+          <>
+            <Side>
+              <Preview images={Object.values(pokemon.sprites)} />
+              <Button
+                type='button'
+                css={css({
+                  color: '#ffffff',
+                  backgroundColor: '#D02806',
+                })}
+                onClick={() => setShowModal(true)}
+                disabled={wasReleased}
+              >
+                {wasReleased ? `${props.name} was released` : 'Release'}
+              </Button>
+            </Side>
+            <Main css={{ gap: '1rem 0' }}>
+              <PokemonName
+                name={`${props.name} (${pokemon.name})`}
+                overallStat={overallStat}
+                types={pokemon.types}
+              />
+              <BaseStatus stats={pokemon.stats} />
+              <OtherSection title="Abilities" others={pokemon.abilities} />
+              <OtherSection title="Moves" others={pokemon.moves} />
+            </Main>
+          </>
+        )
+      }
 
       {showModal && (
         <Modal onClickBackdrop={() => setShowModal(false)}>
@@ -122,7 +127,6 @@ export default function PokemonDetail(props) {
                 padding: '.1rem 1rem',
                 backgroundColor: '#D02806',
                 color: '#ffffff',
-                cursor: 'pointer'
               }}
               onClick={() => onClickRelease()}
             >
@@ -132,7 +136,6 @@ export default function PokemonDetail(props) {
               css={{
                 margin: '.5rem 0 0',
                 padding: '.1rem 1rem',
-                cursor: 'pointer'
               }}
               onClick={() => setShowModal(false)}
             >
@@ -145,13 +148,12 @@ export default function PokemonDetail(props) {
       {showNotif && (
         <Modal onClickBackdrop={() => setShowNotif(false)}>
           <h2>Success</h2>
-          <p><strong className='capitalize'>{props.name}</strong> was release.</p>
+          <p><strong className='capitalize'>{props.name}</strong> was released.</p>
           <div css={css({ display: 'flex', justifyContent: 'flex-end', gap: '.5rem' })}>
             <Button
               css={{
                 margin: '.5rem 0 0',
                 padding: '.1rem 1rem',
-                cursor: 'pointer'
               }}
               onClick={() => setShowNotif(false)}
             >

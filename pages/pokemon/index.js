@@ -12,13 +12,11 @@ import { useRouter } from 'next/router';
 import { css } from '@emotion/react';
 import { Context } from 'store';
 
+import { PageLoader } from 'components/loader';
 import { Container, ContainerList } from 'components/container';
 import { PokemonCard } from 'components/card';
 import { SEO } from 'components/seo';
 
-const PageLoader = dynamic(() =>
-  import('components/loader').then(mod => mod.PageLoader)
-);
 const Shimmer = dynamic(() =>
   import('components/loader').then(mod => mod.Shimmer)
 );
@@ -82,39 +80,45 @@ export default function PokemonList() {
     return;
   }
 
-  if (loading && !pokemons.length) return <PageLoader />
-
   return (
     <Container dataTestId="pokemon">
       <SEO
         title="Pokemon Pedia | Pokemon"
         description="Pokemon List"
+        path="/pokemon"
       />
-      <ContainerList>
-        {pokemons.map(pokemon => {
-          return (
-            <Link key={pokemon.id} href={`/pokemon/${pokemon.name}`} passHref>
-              <PokemonCard
-                id={pokemon.id}
-                img={pokemon.dreamworld}
-                labelLeft={pokemon.name}
-                labelRight={`You have: ${context.countPokemon(pokemon.name)}`}
-              />
-            </Link>
-          );
-        })}
-      </ContainerList>
-      {loading
-        ? <Shimmer />
+      {loading && !pokemons.length
+        ? <PageLoader />
         : (
-          <div
-            ref={observerRef}
-            css={css({
-              marginTop: '-40rem',
-              backgroundColor: 'red',
-              height: '1px'
-            })}
-          ></div>
+          <>
+            <ContainerList>
+              {pokemons.map(pokemon => {
+                return (
+                  <Link key={pokemon.id} href={`/pokemon/${pokemon.name}`} passHref>
+                    <PokemonCard
+                      id={pokemon.id}
+                      img={pokemon.dreamworld}
+                      labelLeft={pokemon.name}
+                      labelRight={`You have: ${context.countPokemon(pokemon.name)}`}
+                    />
+                  </Link>
+                );
+              })}
+            </ContainerList>
+            {loading
+              ? <Shimmer />
+              : (
+                <div
+                  ref={observerRef}
+                  css={css({
+                    marginTop: '-40rem',
+                    backgroundColor: 'red',
+                    height: '1px'
+                  })}
+                ></div>
+              )
+            }
+          </>
         )
       }
     </Container>

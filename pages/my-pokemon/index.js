@@ -14,6 +14,7 @@ export default function MyPokemon() {
       <SEO
         title="Pokemon Pedia - My Pokemon"
         description="My Pokemon List"
+        path="my-pokemon"
       />
       <ContainerList>
         {myPokemon.map((pokemon, idx) => {
@@ -23,7 +24,7 @@ export default function MyPokemon() {
                 id={idx + 1}
                 img={pokemon.dreamworld}
                 labelLeft={pokemon.local_name}
-                labelRight={pokemon.name}
+                labelRight={pokemon.name.toUpperCase()}
               />
             </Link>
           );

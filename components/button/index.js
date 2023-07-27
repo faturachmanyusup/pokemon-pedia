@@ -6,9 +6,10 @@ export const Button = styled.button(props => ({
   lineHeight: '2rem',
   borderRadius: '8px',
   margin: '1rem 0',
+  cursor: 'pointer',
   ':disabled': {
     filter: 'contrast(80%)',
-    cursor: 'not-allowed'
+    cursor: 'default'
   },
   ...props.css
 }))

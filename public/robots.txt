@@ -1,2 +1,4 @@
 User-Agent: *
 Allow: /
+
+Sitemap: https://pokemon-pedia.vercel.app/sitemap.xml

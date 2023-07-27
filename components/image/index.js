@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 export const Preview = (props) => {
-  const [preview, setPreview] = useState(props.images[0]);
+  const [preview, setPreview] = useState(props.images[2]);
 
   return (
     <div data-testid="preview-image">
@@ -29,7 +29,7 @@ export const Preview = (props) => {
         })}
         data-testid="preview-options"
       >
-        {props.images.map((img, idx) => (
+        {[props.images[2], props.images[0], props.images[3], props.images[1]].map((img, idx) => (
           <Card
             key={idx}
             css={css({
