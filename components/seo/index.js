@@ -6,7 +6,7 @@ export const SEO = (props) => {
     <Head>
       <title>{props.title || ''}</title>
       <link rel="icon" href="/favicon.ico" />
-      <link rel="canonical" href={SITE_URL}  />
+      <link rel="canonical" href={`${SITE_URL}/pokemon`}  />
       <meta name="description" content={props.description || ''} />
       <meta name="google-site-verification" content="ukQV3uEuJQsAMgot1NKex8GlljENmVz__jczChQUmUw" />
     </Head>

@@ -9,7 +9,7 @@ export default function Document() {
         <meta name='description' content='Pokemon App' />
         <meta name='theme-color' content='#EE4240' />
         <meta name="google-site-verification" content="ukQV3uEuJQsAMgot1NKex8GlljENmVz__jczChQUmUw" />
-        <link rel="canonical" href={SITE_URL} />
+        <link rel="canonical" href={`${SITE_URL}/pokemon`}  />
         <link rel='apple-touch-icon' href='/assets/icons/apple-touch-icon.png' />
         <link rel='manifest' href='/manifest.json' />
       </Head>
