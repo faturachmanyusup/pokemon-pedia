@@ -96,7 +96,6 @@ export default function PokemonDetail(props) {
       <SEO
         title={`Pokemon Pedia - ${capitalize(props.pokemon.name)}`}
         description={`${props.pokemon.name} Detail`}
-        path={`/pokemon/${props.pokemon.name}`}
       />
       <Side>
         <Preview images={Object.values(props.pokemon.sprites)} />

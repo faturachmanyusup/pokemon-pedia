@@ -85,7 +85,6 @@ export default function PokemonList() {
       <SEO
         title="Pokemon Pedia | Pokemon"
         description="Pokemon List"
-        path="/pokemon"
       />
       {loading && !pokemons.length
         ? <PageLoader />

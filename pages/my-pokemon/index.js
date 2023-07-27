@@ -14,7 +14,6 @@ export default function MyPokemon() {
       <SEO
         title="Pokemon Pedia - My Pokemon"
         description="My Pokemon List"
-        path="my-pokemon"
       />
       <ContainerList>
         {myPokemon.map((pokemon, idx) => {

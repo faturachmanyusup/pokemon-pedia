@@ -80,7 +80,6 @@ export default function PokemonDetail(props) {
       <SEO
         title={`Pokemon Pedia - ${capitalize(props.name)}`}
         description={`${props.name} Detail`}
-        path={`/my-pokemon/${props.name}`}
       />
       {loading
         ? <PageLoader />
