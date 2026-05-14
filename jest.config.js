@@ -1,11 +1,3 @@
-// const nextJest = require('next/jest')
-
-// const createJestConfig = nextJest({
-//   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
-//   dir: './',
-// })
-
-// Add any custom config to be passed to Jest
 module.exports = {
   collectCoverageFrom: [
     '**/*.{js,jsx,ts,tsx}',
@@ -17,6 +9,12 @@ module.exports = {
     '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
     '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
     'components/(.*)$': '<rootDir>/components/$1',
+    'styles/(.*)$': '<rootDir>/styles/$1',
+    'config/(.*)$': '<rootDir>/config/$1',
+    'gpql/(.*)$': '<rootDir>/gpql/$1',
+    'helpers/(.*)$': '<rootDir>/helpers/$1',
+    'store': '<rootDir>/store/index.tsx',
+    'types/(.*)$': '<rootDir>/types/$1',
   },
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/.next/'],
   testEnvironment: 'jsdom',
@@ -29,7 +27,11 @@ module.exports = {
   ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   moduleDirectories: ['node_modules', '<rootDir>/'],
-  testEnvironment: 'jest-environment-jsdom',
-}
-
-// module.exports = createJestConfig(customJestConfig);
+  globals: {
+    'ts-jest': {
+      tsconfig: {
+        jsx: 'react'
+      }
+    }
+  }
+};
