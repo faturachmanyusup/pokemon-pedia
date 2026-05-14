@@ -21,7 +21,7 @@ export default function MyPokemon(): JSX.Element {
             <Link key={idx + 1} href={`/my-pokemon/${pokemon.local_name.toLowerCase()}`} passHref legacyBehavior>
               <PokemonCard
                 id={idx + 1}
-                img={pokemon.dreamworld}
+                img={pokemon.dreamworld || ''}
                 labelLeft={pokemon.local_name}
                 labelRight={pokemon.name.toUpperCase()}
               />
@@ -32,4 +32,3 @@ export default function MyPokemon(): JSX.Element {
     </Container>
   );
 }
-

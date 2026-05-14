@@ -6,7 +6,6 @@
     "indent": ["error", 2],
     "eqeqeq": "error",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
     "@typescript-eslint/no-explicit-any": "off",
     "no-console": "warn",
     "react/display-name": "off",

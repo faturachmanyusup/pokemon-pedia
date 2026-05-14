@@ -92,11 +92,11 @@ export const OtherSection = (props: OtherSectionProps): JSX.Element => {
         })}
       >
         {props.others.map((other, idx) => {
-          const key = Object.keys(other)[0] as keyof typeof other;
+          const detail = 'ability' in other ? other.ability : other.move;
 
           return (
             <h4 key={idx} className='text-normal capitalize'>
-              {other[key]?.name.split('-').map(name => `${name} `)}
+              {detail.name.split('-').map(name => `${name} `)}
             </h4>
           );
         })}

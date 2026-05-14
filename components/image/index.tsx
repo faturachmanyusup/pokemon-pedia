@@ -12,7 +12,7 @@ export const Preview = (props: PreviewProps): JSX.Element => {
 
   return (
     <div data-testid="preview-image">
-      <Card classname='cursor-default' css={{ textAlign: 'center' }}>
+      <Card className='cursor-default' css={{ textAlign: 'center' }}>
         <Image
           src={preview || ''}
           width={200}
@@ -58,4 +58,3 @@ export const Preview = (props: PreviewProps): JSX.Element => {
     </div>
   );
 };
-
